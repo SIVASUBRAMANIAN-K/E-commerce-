@@ -65,16 +65,26 @@ class _SearchScreenState extends State<SearchScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: TextField(
-          decoration: InputDecoration(
-            hintText: "Search for products",
-            prefixIcon: Icon(Icons.search),
-            border: OutlineInputBorder(
+        title: Padding(
+          padding: const EdgeInsets.only(
+            top: 8.0,
+            bottom: 8.0,
+          ), // Adjust the padding to control the position
+          child: Container(
+            height: 50,
+            decoration: BoxDecoration(
+              color: Colors.grey[200],
               borderRadius: BorderRadius.circular(30),
-              borderSide: BorderSide.none,
             ),
-            filled: true,
-            fillColor: Colors.grey[200],
+            child: TextField(
+              decoration: InputDecoration(
+                hintText: "Search for products",
+                prefixIcon: Icon(Icons.search, color: Colors.grey),
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.only(
+                    top: 12), // Adjust padding inside the TextField
+              ),
+            ),
           ),
         ),
       ),
