@@ -60,7 +60,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 color: Colors.grey[200],
                 child: Center(
                   child: Image.network(
-                    'https://via.placeholder.com/300',
+                    'https://picsum.photos/300',
                     fit: BoxFit.cover,
                   ),
                 ),

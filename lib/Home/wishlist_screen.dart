@@ -11,21 +11,21 @@ class _WishlistScreenState extends State<WishlistScreen> {
       "id": 1,
       "name": "Product 1",
       "price": 499.99,
-      "image": "https://via.placeholder.com/150",
+      "image": "https://picsum.photos/200",
       "description": "This is the description of Product 1."
     },
     {
       "id": 2,
       "name": "Product 2",
       "price": 299.99,
-      "image": "https://via.placeholder.com/150",
+      "image": "https://picsum.photos/200",
       "description": "This is the description of Product 2."
     },
     {
       "id": 3,
       "name": "Product 3",
       "price": 199.99,
-      "image": "https://via.placeholder.com/150",
+      "image": "https://picsum.photos/200",
       "description": "This is the description of Product 3."
     },
   ];
@@ -100,6 +100,13 @@ class _WishlistScreenState extends State<WishlistScreen> {
                       width: 60,
                       height: 60,
                       fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Icon(
+                          Icons.broken_image,
+                          size: 60,
+                          color: Colors.grey,
+                        );
+                      },
                     ),
                     title: Text(item["name"]),
                     subtitle: Text("\$${item["price"]}"),

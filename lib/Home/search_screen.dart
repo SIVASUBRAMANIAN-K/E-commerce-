@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
 class SearchScreen extends StatefulWidget {
   @override
@@ -23,15 +24,15 @@ class _SearchScreenState extends State<SearchScreen> {
     'Toys'
   ];
   List<Map<String, String>> trendingProducts = [
-    {'name': 'Dual Name Plank', 'image': 'https://via.placeholder.com/150'},
-    {'name': 'Colour Pops', 'image': 'https://via.placeholder.com/150'},
-    {'name': 'Anniversary Gifts', 'image': 'https://via.placeholder.com/150'},
-    {'name': 'Special Combos', 'image': 'https://via.placeholder.com/150'},
-    {'name': 'Birthday Gifts', 'image': 'https://via.placeholder.com/150'},
-    {'name': 'Wedding Gifts', 'image': 'https://via.placeholder.com/150'},
-    {'name': 'Name Planks', 'image': 'https://via.placeholder.com/150'},
-    {'name': 'Moon Lamps', 'image': 'https://via.placeholder.com/150'},
-    {'name': 'Pet Tags', 'image': 'https://via.placeholder.com/150'},
+    {'name': 'Dual Name Plank', 'image': 'assets/images/trending0.jpg'},
+    {'name': 'Colour Pops', 'image': 'assets/images/trending1.jpg'},
+    {'name': 'Anniversary Gifts', 'image': 'assets/images/trending2.jpg'},
+    {'name': 'Special Combos', 'image': 'assets/images/trending3.jpg'},
+    {'name': 'Birthday Gifts', 'image': 'assets/images/trending4.jpg'},
+    {'name': 'Wedding Gifts', 'image': 'assets/images/trending5.jpg'},
+    {'name': 'Name Planks', 'image': 'assets/images/trending6.jpg'},
+    {'name': 'Moon Lamps', 'image': 'assets/images/trending7.jpg'},
+    {'name': 'Pet Tags', 'image': 'assets/images/trending8.jpg'},
   ];
 
   String query = "";
@@ -64,30 +65,24 @@ class _SearchScreenState extends State<SearchScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
+        title: TextField(
+          decoration: InputDecoration(
+            hintText: "Search for products",
+            prefixIcon: Icon(Icons.search),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30),
+              borderSide: BorderSide.none,
+            ),
+            filled: true,
+            fillColor: Colors.grey[200],
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Search Bar
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: "Search for products",
-                  prefixIcon: Icon(Icons.search),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: BorderSide.none,
-                  ),
-                  filled: true,
-                  fillColor: Colors.grey[200],
-                ),
-              ),
-            ),
-            SizedBox(height: 16),
-
             // Recent Searches
             if (recentSearches.isNotEmpty)
               Column(
@@ -178,11 +173,7 @@ class _SearchScreenState extends State<SearchScreen> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.vertical(
                                   top: Radius.circular(12)),
-                              child: Image.network(
-                                product['image']!,
-                                width: double.infinity,
-                                fit: BoxFit.cover,
-                              ),
+                              child: _buildShimmerImage(product['image']!),
                             ),
                           ),
                           Padding(
@@ -231,6 +222,25 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildShimmerImage(String assetPath) {
+    return Image.asset(
+      assetPath,
+      fit: BoxFit.cover,
+      width: double.infinity,
+      errorBuilder: (context, error, stackTrace) {
+        return Shimmer.fromColors(
+          baseColor: Colors.grey[300]!,
+          highlightColor: Colors.grey[100]!,
+          child: Container(
+            color: Colors.white,
+            width: double.infinity,
+            height: double.infinity,
+          ),
+        );
+      },
     );
   }
 }
